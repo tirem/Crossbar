@@ -57,9 +57,15 @@ struct SubPanelTheme_t
     int DpadWidth;
     int DpadHeight;
 
+    int TriggerOffsetX;
+    int TriggerOffsetY;
+    int TriggerWidth;
+    int TriggerHeight;
+
     Gdiplus::Image* pButtons;
     Gdiplus::Image* pDpad;
     Gdiplus::Image* pFrame;
+    Gdiplus::Image* pTrigger;
 
     SubPanelTheme_t(IAshitaCore* pAshitaCore, xml_node<>* baseNode);
     ~SubPanelTheme_t();

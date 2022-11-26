@@ -33,6 +33,7 @@ bool Crossbar::Initialize(IAshitaCore* core, ILogManager* logger, const uint32_t
     pBindings                             = NULL;
     pSettings                             = NULL;
     mZoning                               = false;
+    bHookedInput                          = false;
 
     MODULEINFO mod = {0};
     ::GetModuleInformation(::GetCurrentProcess(), ::GetModuleHandle("FFXiMain.dll"), &mod, sizeof(MODULEINFO));
@@ -165,21 +166,27 @@ void Crossbar::Direct3DPresent(const RECT* pSourceRect, const RECT* pDestRect, H
     UNREFERENCED_PARAMETER(hDestWindowOverride);
     UNREFERENCED_PARAMETER(pDirtyRegion);
 
+
     if (pSettings == nullptr)
         return;
 
-    if (pDirectInput)
+    if (!bHookedInput)
     {
-        if (pDirectInput->AttemptHook())
+        if (pDirectInput)
         {
-            m_AshitaCore->GetChatManager()->Writef(0, false, "%s%s", Ashita::Chat::Header("Crossbar").c_str(), Ashita::Chat::Message("Hooked DirectInput!").c_str());
+            if (pDirectInput->AttemptHook())
+            {
+                m_AshitaCore->GetChatManager()->Writef(0, false, "%s%s", Ashita::Chat::Header("Crossbar").c_str(), Ashita::Chat::Message("Hooked DirectInput!").c_str());
+                bHookedInput = true;
+            }
         }
-    }
-    if (pXInput)
-    {
-        if (pXInput->AttemptHook())
+        if (pXInput)
         {
-            m_AshitaCore->GetChatManager()->Writef(0, false, "%s%s", Ashita::Chat::Header("Crossbar").c_str(), Ashita::Chat::Message("Hooked XInput!").c_str());
+            if (pXInput->AttemptHook())
+            {
+                m_AshitaCore->GetChatManager()->Writef(0, false, "%s%s", Ashita::Chat::Header("Crossbar").c_str(), Ashita::Chat::Message("Hooked XInput!").c_str());
+                bHookedInput = true;
+            }
         }
     }
 
@@ -228,6 +235,7 @@ void Crossbar::Direct3DPresent(const RECT* pSourceRect, const RECT* pDestRect, H
             pMenu->Draw();
         }
     }
+ 
     if (pCanvas)
     {
         MacroMode drawMode = mCurrentMode;

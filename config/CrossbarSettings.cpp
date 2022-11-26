@@ -85,6 +85,7 @@ SubPanelTheme_t::SubPanelTheme_t(IAshitaCore* pAshitaCore, xml_node<>* baseNode)
 	pButtons = NULL;
 	pDpad = NULL;
 	pFrame = NULL;
+	pTrigger = NULL;
 	for (xml_node<>* subNode = baseNode->first_node(); subNode; subNode = subNode->next_sibling())
 	{
 		if (_stricmp(subNode->name(), "width") == 0)
@@ -184,6 +185,22 @@ SubPanelTheme_t::SubPanelTheme_t(IAshitaCore* pAshitaCore, xml_node<>* baseNode)
 					DpadOffsetY = atoi(buttonNode->value());
 			}
 		}
+        else if (_stricmp(subNode->name(), "trigger") == 0)
+        {
+            for (xml_node<>* buttonNode = subNode->first_node(); buttonNode; buttonNode = buttonNode->next_sibling())
+            {
+                if (_stricmp(buttonNode->name(), "image") == 0)
+                    CrossbarSettings::LoadImageFromResourceFolder(&pTrigger, pAshitaCore, buttonNode->value());
+                else if (_stricmp(buttonNode->name(), "width") == 0)
+                    DpadWidth = atoi(buttonNode->value());
+                else if (_stricmp(buttonNode->name(), "height") == 0)
+                    DpadHeight = atoi(buttonNode->value());
+                else if (_stricmp(buttonNode->name(), "offsetx") == 0)
+                    DpadOffsetX = atoi(buttonNode->value());
+                else if (_stricmp(buttonNode->name(), "offsety") == 0)
+                    DpadOffsetY = atoi(buttonNode->value());
+            }
+        }
 	}
 }
 SubPanelTheme_t::~SubPanelTheme_t()
@@ -191,6 +208,7 @@ SubPanelTheme_t::~SubPanelTheme_t()
 	SAFE_DELETE(pFrame);
 	SAFE_DELETE(pButtons);
 	SAFE_DELETE(pDpad);
+    SAFE_DELETE(pTrigger);
 }
 
 MacroTheme_t::MacroTheme_t(IAshitaCore* pAshitaCore, xml_node<>* baseNode)

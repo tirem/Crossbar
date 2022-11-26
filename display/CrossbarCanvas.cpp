@@ -104,6 +104,19 @@ void CrossbarCanvas::Draw(MacroMode mode)
         }
         pSubPrimitive->SetVisible(true);
     }
+
+    // Tell our macrosets if they are being triggered
+    for (int x = 0; x < 6; x++)
+    {
+        if (mode == (MacroMode)x)
+        {
+            pMacros[x]->ToggleTrigger(true);
+        }
+        else
+        {
+            pMacros[x]->ToggleTrigger(false);
+        }
+    }
 }
 void CrossbarCanvas::HandleButton(MacroButton button, MacroMode mode)
 {

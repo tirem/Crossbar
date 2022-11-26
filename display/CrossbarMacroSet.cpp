@@ -58,6 +58,7 @@ CrossbarMacroSet::CrossbarMacroSet(IAshitaCore* pAshitaCore, CrossbarSettings* p
     }
 
     mForceRedraw = true;
+    bDrawTrigger = false;
 }
 CrossbarMacroSet::~CrossbarMacroSet()
 {
@@ -77,9 +78,22 @@ bool CrossbarMacroSet::Draw(GdiDIB* pDIB)
 
     if (redraw)
     {
+        // Buttons region
+        pDIB->ClearRegion(mOffsetX + pSettings->pSubPanel->ButtonsOffsetX, mOffsetY + pSettings->pSubPanel->ButtonsOffsetY, pSettings->pSubPanel->ButtonsWidth, pSettings->pSubPanel->ButtonsHeight);
+        if (bDrawTrigger && pSettings->pSubPanel->pTrigger != NULL)
+        {
+            pDIB->GetGraphics()->DrawImage(pSettings->pSubPanel->pTrigger, Gdiplus::Rect(mOffsetX + pSettings->pSubPanel->ButtonsOffsetX, mOffsetY + pSettings->pSubPanel->ButtonsOffsetY, pSettings->pSubPanel->ButtonsWidth, pSettings->pSubPanel->ButtonsHeight));
+        }
         if (pSettings->pSubPanel->pButtons != NULL)
         {
             pDIB->GetGraphics()->DrawImage(pSettings->pSubPanel->pButtons, Gdiplus::Rect(mOffsetX + pSettings->pSubPanel->ButtonsOffsetX, mOffsetY + pSettings->pSubPanel->ButtonsOffsetY, pSettings->pSubPanel->ButtonsWidth, pSettings->pSubPanel->ButtonsHeight));
+        }
+
+        // DPad Region
+        pDIB->ClearRegion(mOffsetX + pSettings->pSubPanel->DpadOffsetX, mOffsetY + pSettings->pSubPanel->DpadOffsetY, pSettings->pSubPanel->DpadWidth, pSettings->pSubPanel->DpadHeight);
+        if (bDrawTrigger && pSettings->pSubPanel->pTrigger != NULL)
+        {
+            pDIB->GetGraphics()->DrawImage(pSettings->pSubPanel->pTrigger, Gdiplus::Rect(mOffsetX + pSettings->pSubPanel->DpadOffsetX, mOffsetY + pSettings->pSubPanel->DpadOffsetY, pSettings->pSubPanel->DpadWidth, pSettings->pSubPanel->DpadHeight));
         }
         if (pSettings->pSubPanel->pDpad != NULL)
         {
@@ -108,4 +122,13 @@ void CrossbarMacroSet::ForceMacroRedraw()
 void CrossbarMacroSet::TriggerMacro(MacroButton button)
 {
     pMacros[(int)button]->TriggerMacro();
+}
+
+void CrossbarMacroSet::ToggleTrigger(bool bShowTrigger)
+{
+    if (bShowTrigger != bDrawTrigger)
+    {
+        bDrawTrigger = bShowTrigger;
+        mForceRedraw = true;
+    }
 }

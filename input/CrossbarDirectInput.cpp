@@ -158,9 +158,9 @@ void CrossbarDirectInput::HandleState(DIJOYSTATE* pState)
 	data.LeftTrigger = (pState->rgbButtons[6] & 0x80);
 	data.RightTrigger = (pState->rgbButtons[7] & 0x80);
 	data.Buttons[0] = (pState->rgbButtons[3] & 0x80);
-	data.Buttons[1] = (pState->rgbButtons[2] & 0x80);
-	data.Buttons[2] = (pState->rgbButtons[1] & 0x80);
-	data.Buttons[3] = (pState->rgbButtons[0] & 0x80);
+	data.Buttons[1] = (pState->rgbButtons[1] & 0x80);
+	data.Buttons[2] = (pState->rgbButtons[0] & 0x80);
+	data.Buttons[3] = (pState->rgbButtons[2] & 0x80);
 	data.LeftShoulder = (pState->rgbButtons[4] & 0x80);
 	data.RightShoulder = (pState->rgbButtons[5] & 0x80);
 
@@ -190,9 +190,9 @@ void CrossbarDirectInput::HandleStateExtended(DIJOYSTATE2* pState)
 	data.LeftTrigger = (pState->rgbButtons[6] & 0x80);
 	data.RightTrigger = (pState->rgbButtons[7] & 0x80);
 	data.Buttons[0] = (pState->rgbButtons[3] & 0x80);
-	data.Buttons[1] = (pState->rgbButtons[2] & 0x80);
-	data.Buttons[2] = (pState->rgbButtons[1] & 0x80);
-	data.Buttons[3] = (pState->rgbButtons[0] & 0x80);
+	data.Buttons[1] = (pState->rgbButtons[1] & 0x80);
+	data.Buttons[2] = (pState->rgbButtons[0] & 0x80);
+	data.Buttons[3] = (pState->rgbButtons[2] & 0x80);
 	data.LeftShoulder = (pState->rgbButtons[4] & 0x80);
 	data.RightShoulder = (pState->rgbButtons[5] & 0x80);
 

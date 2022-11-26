@@ -30,12 +30,14 @@ private:
 
 public:
     bool mForceRedraw;
+    bool bDrawTrigger;
 
     CrossbarMacroSet(IAshitaCore* pAshitaCore, CrossbarSettings* pSettings, CrossbarBindings* pBindings, MacroMode mode);
     ~CrossbarMacroSet();
     bool Draw(GdiDIB* pDIB);
     void ForceMacroRedraw();
     void TriggerMacro(MacroButton button);
+    void ToggleTrigger(bool bShowTrigger);
 };
 
 #endif

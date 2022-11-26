@@ -21,6 +21,7 @@ private:
     IDirect3DDevice8* m_Direct3DDevice;
     uint32_t m_PluginId;
     InputHandler* pInput;
+    bool bHookedInput;
     CrossbarSettings* pSettings;
     CrossbarBindings* pBindings;
     CrossbarXInput* pXInput;
