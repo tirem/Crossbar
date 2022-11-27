@@ -298,9 +298,11 @@ std::string Crossbar::GetMenuHelpText()
 }
 void Crossbar::HandleButtonPress(MacroButton button)
 {
+    bool bTriggerPulled = (mCurrentMode == MacroMode::LeftTrigger) || (mCurrentMode == MacroMode::LeftTriggerDT) || (mCurrentMode == MacroMode::RightTrigger) || (mCurrentMode == MacroMode::RightTriggerDT);
+
     if (button == MacroButton::ShoulderLeft)
     {
-        if ((mCurrentMode == MacroMode::LeftTrigger) || (mCurrentMode == MacroMode::LeftTriggerDT))
+        if (bTriggerPulled)
         {
             if (pBindings)
             {
@@ -323,7 +325,7 @@ void Crossbar::HandleButtonPress(MacroButton button)
 
     if (button == MacroButton::ShoulderRight)
     {
-        if ((mCurrentMode == MacroMode::RightTrigger) || (mCurrentMode == MacroMode::RightTriggerDT))
+        if (bTriggerPulled)
         {
             if (pBindings)
             {
