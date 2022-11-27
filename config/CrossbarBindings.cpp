@@ -452,7 +452,7 @@ CrossbarBindings::CrossbarBindings(IAshitaCore* pAshitaCore, const char* playerN
     : pAshitaCore(pAshitaCore)
     , pSettings(pSettings)
     , pDisplayPalette(NULL)
-    , mRedraw(false)
+    , mRedraw(true)
 {
     Load(playerName, playerId, playerJob);
 }

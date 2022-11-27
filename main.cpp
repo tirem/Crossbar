@@ -247,7 +247,7 @@ void Crossbar::Direct3DPresent(const RECT* pSourceRect, const RECT* pDestRect, H
                 drawMode = overrideMode;
             }
         }
-        pCanvas->Draw(drawMode);
+        pCanvas->Draw(drawMode, m_AshitaCore);
     }
 }
 bool Crossbar::GetMenuActive()
@@ -298,7 +298,7 @@ std::string Crossbar::GetMenuHelpText()
 }
 void Crossbar::HandleButtonPress(MacroButton button)
 {
-    bool bTriggerPulled = (mCurrentMode == MacroMode::LeftTrigger) || (mCurrentMode == MacroMode::LeftTriggerDT) || (mCurrentMode == MacroMode::RightTrigger) || (mCurrentMode == MacroMode::RightTriggerDT);
+    bool bTriggerPulled = mCurrentMode != MacroMode::NoTrigger;
 
     if (button == MacroButton::ShoulderLeft)
     {

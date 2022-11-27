@@ -191,16 +191,18 @@ SubPanelTheme_t::SubPanelTheme_t(IAshitaCore* pAshitaCore, xml_node<>* baseNode)
             {
                 if (_stricmp(buttonNode->name(), "image") == 0)
                     CrossbarSettings::LoadImageFromResourceFolder(&pTrigger, pAshitaCore, buttonNode->value());
-                else if (_stricmp(buttonNode->name(), "width") == 0)
-                    DpadWidth = atoi(buttonNode->value());
-                else if (_stricmp(buttonNode->name(), "height") == 0)
-                    DpadHeight = atoi(buttonNode->value());
-                else if (_stricmp(buttonNode->name(), "offsetx") == 0)
-                    DpadOffsetX = atoi(buttonNode->value());
-                else if (_stricmp(buttonNode->name(), "offsety") == 0)
-                    DpadOffsetY = atoi(buttonNode->value());
             }
         }
+        else if (_stricmp(subNode->name(), "palette") == 0)
+        {
+            for (xml_node<>* buttonNode = subNode->first_node(); buttonNode; buttonNode = buttonNode->next_sibling())
+            {
+				if (_stricmp(buttonNode->name(), "width") == 0)
+					PaletteWidth = atoi(buttonNode->value());
+				else if (_stricmp(buttonNode->name(), "height") == 0)
+                    PaletteHeight = atoi(buttonNode->value());
+			}
+		}
 	}
 }
 SubPanelTheme_t::~SubPanelTheme_t()
@@ -216,6 +218,7 @@ MacroTheme_t::MacroTheme_t(IAshitaCore* pAshitaCore, xml_node<>* baseNode)
 	pCost = NULL;
 	pName = NULL;
 	pRecast = NULL;
+	pPalette = NULL;
 	pTriggerBrush = NULL;
 	pBackgroundBrush = NULL;
 	pDefaultAbilityIcon = NULL;
@@ -249,6 +252,11 @@ MacroTheme_t::MacroTheme_t(IAshitaCore* pAshitaCore, xml_node<>* baseNode)
 			SAFE_DELETE(pName);
 			pName = new GDITextElementInfo(subNode);
 		}
+        else if (_stricmp(subNode->name(), "palette") == 0)
+        {
+            SAFE_DELETE(pPalette);
+            pPalette = new GDITextElementInfo(subNode);
+        }
 		else if (_stricmp(subNode->name(), "triggercolor") == 0)
 		{
 			SAFE_DELETE(pTriggerBrush);
@@ -424,6 +432,8 @@ CrossbarSettings::CrossbarSettings(IAshitaCore* pAshitaCore, const char* playerN
 					mInput.TapDuration = atoi(subNode->value());
 				else if (_stricmp(subNode->name(), "menuduration") == 0)
                     mInput.MenuDuration = atoi(subNode->value());
+                else if (_stricmp(subNode->name(), "palettedelay") == 0)
+                    mInput.PaletteDelay = atoi(subNode->value());
                 else if (_stricmp(subNode->name(), "enablexinput") == 0)
                     mInput.EnableXInput = (_stricmp(subNode->value(), "false") != 0);
                 else if (_stricmp(subNode->name(), "enabledinput") == 0)
@@ -578,6 +588,10 @@ void CrossbarSettings::WriteDefaultSettings(const char* path)
 		outStream << "    <!--The length of time, in milliseconds, you have to hold L1+L2+R1+R2 to open/close binding menu.-->\n";
 		outStream << "    <menuduration>1200</menuduration>\n";
 		outStream << "    \n";
+
+		outStream << "    <!--The duration of time, in milliseconds, to show a new palettes name after a refresh.-->\n";
+        outStream << "    <palettedelay>3000</palettedelay>\n";
+        outStream << "    \n";
 
         outStream << "    <!--If enabled, allows xinput hook to occur.-->\n";
         outStream << "    <enablexinput>true</enablexinput>\n";

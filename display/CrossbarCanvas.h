@@ -18,6 +18,8 @@ private:
 	IPrimitiveObject* pMainPrimitive;
 	GdiDIB* pSubDisplay;
 	IPrimitiveObject* pSubPrimitive;
+    GdiDIB* pPaletteDisplay;
+    IPrimitiveObject* pPalettePrimitive;
 
 	CrossbarBindings* pBindings;
 	CrossbarSettings* pSettings;
@@ -25,11 +27,16 @@ private:
 	CrossbarMacroSet* pMacros[6];
     MacroMode mLastSingleMode;
 
+	wchar_t PaletteText[1024];
+    Gdiplus::GraphicsPath* PalettePath;
+    Gdiplus::Rect PaletteRect;
+    std::chrono::steady_clock::time_point mPaletteTimer;
+
 public:
 	CrossbarCanvas(IAshitaCore* pAshitaCore, CrossbarSettings* pSettings, CrossbarBindings* pBindings);
 	~CrossbarCanvas();
 
-	void Draw(MacroMode mode);
+	void Draw(MacroMode mode, IAshitaCore* m_AshitaCore);
 	void HandleButton(MacroButton button, MacroMode mode);
 	void Hide();
 	void UpdateBindings(CrossbarBindings* pNewBindings);

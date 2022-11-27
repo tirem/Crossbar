@@ -35,6 +35,9 @@ struct SubPanelTheme_t
     int PanelHeight;
     int PanelSpacing;
 
+    int PaletteWidth;
+    int PaletteHeight;
+
     int MacroWidth;
     int MacroHeight;
     int MacroOffsetX[8];
@@ -95,6 +98,7 @@ struct MacroTheme_t
     GDITextElementInfo* pCost;
     GDITextElementInfo* pName;
     GDITextElementInfo* pRecast;
+    GDITextElementInfo* pPalette;
     Gdiplus::SolidBrush* pTriggerBrush;
     Gdiplus::SolidBrush* pBackgroundBrush;
     Gdiplus::Image* pDefaultAbilityIcon;
@@ -113,6 +117,7 @@ struct InputConfig_t
 {
     int MenuDuration;
     int TapDuration;
+    int PaletteDelay;
     bool AllowDoubleTap;
     bool AllowPriority;
     bool AllowButtonsInMenu;
@@ -122,6 +127,7 @@ struct InputConfig_t
     InputConfig_t()
         : MenuDuration(1200)
         , TapDuration(600)
+        , PaletteDelay(3000)
         , AllowDoubleTap(false)
         , AllowPriority(false)
         , AllowButtonsInMenu(false)

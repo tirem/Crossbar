@@ -35,6 +35,7 @@ void CrossbarAddPalette::HandleConfirm()
 
 		pBindings->pJobSettings->mPaletteList.insert(iter, new SinglePaletteInfo_t(mState.mOptions[1].GetValue()));
 		pBindings->SaveJob();
+        pBindings->mRedraw = true;
 		
 		mIsFinished = true;
 		strcpy_s(mCompletionData.Result, 256, "FINISH");
