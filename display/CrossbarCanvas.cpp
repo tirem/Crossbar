@@ -147,8 +147,8 @@ void CrossbarCanvas::Draw(MacroMode mode, IAshitaCore* m_AshitaCore)
     if ((mode == MacroMode::LeftTrigger) || (mode == MacroMode::RightTrigger) || (mode == MacroMode::NoTrigger))
     {
         pSubPrimitive->SetVisible(false);
-       bool reapply = pMacros[(int)MacroMode::LeftTrigger]->Draw(pMainDisplay);
-       if (pMacros[(int)MacroMode::RightTrigger]->Draw(pMainDisplay) || reapply)
+        bool reapply = pMacros[(int)MacroMode::LeftTrigger]->Draw(pMainDisplay);
+        if (pMacros[(int)MacroMode::RightTrigger]->Draw(pMainDisplay) || reapply)
         {
             pMainDisplay->ApplyToPrimitiveObject(pMainPrimitive);
         }

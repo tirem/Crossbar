@@ -570,15 +570,15 @@ void CrossbarSettings::WriteDefaultSettings(const char* path)
 	{
 		outStream << "<crossbarsettings>\n";
 		outStream << "    <!--Themes should be in ashita/resources/crossbar/themes.-->\n";
-		outStream << "    <theme>xinput.xml</theme>\n";
+		outStream << "    <theme>switchpro.xml</theme>\n";
 		outStream << "    \n";
 
 		outStream << "    <!--If enabled, you will have seperate palettes for L2>R2 and R2>L2 based on the order buttons were depressed.  This adds 8 bindings.-->\n";
-		outStream << "    <allowpriority>false</allowpriority>\n";
+		outStream << "    <allowpriority>true</allowpriority>\n";
 		outStream << "    \n";
 
 		outStream << "    <!--If enabled, hitting L2 or R2 twice and holding it the second time will open a secondary palette.  This adds 16 bindings.-->\n";
-		outStream << "    <allowdoubletap>false</allowdoubletap>\n";
+		outStream << "    <allowdoubletap>true</allowdoubletap>\n";
 		outStream << "    \n";
 
 		outStream << "    <!--The length of time, in milliseconds, you are allotted to second-tap L2 or R2 when allowdoubletap is enabled.-->\n";
@@ -586,7 +586,7 @@ void CrossbarSettings::WriteDefaultSettings(const char* path)
 		outStream << "    \n";
 
 		outStream << "    <!--The length of time, in milliseconds, you have to hold L1+L2+R1+R2 to open/close binding menu.-->\n";
-		outStream << "    <menuduration>1200</menuduration>\n";
+		outStream << "    <menuduration>1000</menuduration>\n";
 		outStream << "    \n";
 
 		outStream << "    <!--The duration of time, in milliseconds, to show a new palettes name after a refresh.-->\n";
@@ -634,7 +634,7 @@ void CrossbarSettings::WriteDefaultSettings(const char* path)
         outStream << "    <useplaystationconfirm>false</useplaystationconfirm>\n";
         outStream << "    \n";
         outStream << "    <!--If enabled, binding menu will populate actions based on your synced level instead of real level.-->\n";
-        outStream << "    <uselevelsync>false</uselevelsync>\n";
+        outStream << "    <uselevelsync>true</uselevelsync>\n";
         outStream << "    \n";
         outStream << "    <!--If enabled, controller input will be sent directly to game while game has a menu open.-->\n";
         outStream << "    <allowbuttonsinmenu>false</allowbuttonsinmenu>\n";
